@@ -1,19 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-		<meta name="author" content="{{ site.author }}">
-		{% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
-		<meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
-    	{% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
-    	<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
-    
-		<link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
-	    <link href="{{ root_url }}/favicon.png" rel="shortcut icon">
-	    <link rel="canonical" href="{{ canonical }}">
-		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-		<link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
-		<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-		{% include google_analytics.html %}
-	</head>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+        <meta name="author" content="{{ site.author }}">
+        {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
+        <meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}">
+        {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
+        <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+
+        <link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
+        <link href="{{ root_url }}/favicon.png" rel="shortcut icon">
+        <link rel="canonical" href="{{ canonical }}">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+        <link rel="stylesheet" type="text/css" href="/stylesheets/syntax.css" />
+        <link href="/stylesheets/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen" />
+        <!--[if lt IE 9]>
+            /*
+             HTML5 Shiv v3.6.2 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+            */
+            (function(l,f){function m(){var a=e.elements;return"string"==typeof a?a.split(" "):a}function i(a){var b=n[a[o]];b||(b={},h++,a[o]=h,n[h]=b);return b}function p(a,b,c){b||(b=f);if(g)return b.createElement(a);c||(c=i(b));b=c.cache[a]?c.cache[a].cloneNode():r.test(a)?(c.cache[a]=c.createElem(a)).cloneNode():c.createElem(a);return b.canHaveChildren&&!s.test(a)?c.frag.appendChild(b):b}function t(a,b){if(!b.cache)b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag();
+            a.createElement=function(c){return!e.shivMethods?b.createElem(c):p(c,a,b)};a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+m().join().replace(/\w+/g,function(a){b.createElem(a);b.frag.createElement(a);return'c("'+a+'")'})+");return n}")(e,b.frag)}function q(a){a||(a=f);var b=i(a);if(e.shivCSS&&!j&&!b.hasCSS){var c,d=a;c=d.createElement("p");d=d.getElementsByTagName("head")[0]||d.documentElement;c.innerHTML="x<style>article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}</style>";
+            c=d.insertBefore(c.lastChild,d.firstChild);b.hasCSS=!!c}g||t(a,b);return a}var k=l.html5||{},s=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,r=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,j,o="_html5shiv",h=0,n={},g;(function(){try{var a=f.createElement("a");a.innerHTML="<xyz></xyz>";j="hidden"in a;var b;if(!(b=1==a.childNodes.length)){f.createElement("a");var c=f.createDocumentFragment();b="undefined"==typeof c.cloneNode||
+            "undefined"==typeof c.createDocumentFragment||"undefined"==typeof c.createElement}g=b}catch(d){g=j=!0}})();var e={elements:k.elements||"abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup main mark meter nav output progress section summary time video",version:"3.6.2",shivCSS:!1!==k.shivCSS,supportsUnknownElements:g,shivMethods:!1!==k.shivMethods,type:"default",shivDocument:q,createElement:p,createDocumentFragment:function(a,b){a||(a=f);if(g)return a.createDocumentFragment();
+            for(var b=b||i(a),c=b.frag.cloneNode(),d=0,e=m(),h=e.length;d<h;d++)c.createElement(e[d]);return c}};l.html6=e;q(f)})(this,document);
+        <![endif]-->
+        <script type="text/javascript">
+        //<![CDATA[
+
+            //TableOfContents Plugin for jQuery (by Doug Neiner)
+            //http://fuelyourcoding.com/scripts/toc/
+            (function($){$.TableOfContents=function(el,scope,options){var base=this;base.$el=$(el);base.el=el;base.toc="";base.listStyle=null;base.tags=["h1","h2","h3","h4","h5","h6"];base.init=function(){base.options=$.extend({},$.TableOfContents.defaultOptions,options);if(typeof(scope)=="undefined"||scope==null)scope=document.body;base.$scope=$(scope);var $first=base.$scope.find(base.tags.join(', ')).filter(':first');if($first.length!=1)return;base.starting_depth=base.options.startLevel;if(base.options.depth<1)base.options.depth=1;var filtered_tags=base.tags.splice(base.options.startLevel-1,base.options.depth);base.$headings=base.$scope.find(filtered_tags.join(', '));if(base.options.topLinks!==false){var id=$(document.body).attr('id');if(id==""){id=base.options.topBodyId;document.body.id=id};base.topLinkId=id};if(base.$el.is('ul')){base.listStyle='ul'}else if(base.$el.is('ol')){base.listStyle='ol'};base.buildTOC();if(base.options.proportionateSpacing===true&&!base.tieredList()){base.addSpacing()};return base};base.tieredList=function(){return(base.listStyle=='ul'||base.listStyle=='ol')};base.buildTOC=function(){base.current_depth=base.starting_depth;base.$headings.each(function(i,element){var depth=this.nodeName.toLowerCase().substr(1,1);if(i>0||(i==0&&depth!=base.current_depth)){base.changeDepth(depth)};base.toc+=base.formatLink(this,depth,i)+"\n";if(base.options.topLinks!==false)base.addTopLink(this)});base.changeDepth(base.starting_depth,true);if(base.tieredList())base.toc="<li>\n"+base.toc+"</li>\n";base.$el.html(base.toc)};base.addTopLink=function(element){var text=(base.options.topLinks===true?"Top":base.options.topLinks);var $a=$("<a href='#"+base.topLinkId+"' class='"+base.options.topLinkClass+"'></a>").html(text);$(element).append($a)};base.formatLink=function(element,depth,index){var id=element.id;if(id==""){id=base.buildSlug($(element).text());element.id=id};var a="<a href='#"+id+"'";if(!base.tieredList())a+=" class='"+base.depthClass(depth)+"'";a+=">"+base.options.levelText.replace('%',$(element).text())+'</a>';return a};base.changeDepth=function(new_depth,last){if(last!==true)last=false;if(!base.tieredList()){base.current_depth=new_depth;return true};if(new_depth>base.current_depth){var opening_tags=[];for(var i=base.current_depth;i<new_depth;i++){opening_tags.push('<'+base.listStyle+'>'+"\n")};var li="<li>\n";base.toc+=opening_tags.join(li)+li}else if(new_depth<base.current_depth){var closing_tags=[];for(var i=base.current_depth;i>new_depth;i--){closing_tags.push('</'+base.listStyle+'>'+"\n")};base.toc+="</li>\n"+closing_tags.join('</li>'+"\n");if(!last){base.toc+="</li>\n<li>\n"}}else{if(!last){base.toc+="</li>\n<li>\n"}};base.current_depth=new_depth};base.buildSlug=function(text){text=text.toLowerCase().replace(/[^a-z0-9 -]/gi,'').replace(/ /gi,'-');text=text.substr(0,50);return text};base.depthClass=function(depth){return base.options.levelClass.replace('%',(depth-(base.starting_depth-1)))};base.addSpacing=function(){var start=base.$headings.filter(':first').position().top;base.$headings.each(function(i,el){var $a=base.$el.find('a:eq('+i+')');var pos=(($(this).position().top-start)/(base.$scope.height()-start))*base.$el.height();$a.css({position:"absolute",top:pos})})};return base.init()};$.TableOfContents.defaultOptions={startLevel:1,depth:3,levelClass:"toc-depth-%",levelText:"%",topLinks:false,topLinkClass:"toc-top-link",topBodyId:"toc-top",proportionateSpacing:false};$.fn.tableOfContents=function(scope,options){return this.each(function(){var toc=new $.TableOfContents(this,scope,options);delete toc})}})(jQuery);
+
+            function generateTOC(insertBefore, heading) {
+                var container = jQuery("<div id='tocBlock'></div>");
+                var div = jQuery("<ul id='toc'></ul>");
+                var content = jQuery(insertBefore).first();
+
+                if (heading != undefined && heading != null) {
+                    container.append('<span class="tocHeading">' + heading + '</span>');
+                }
+
+                div.tableOfContents(content);
+                container.append(div);
+                container.insertBefore(insertBefore);
+            }
+
+            jQuery(document).ready(function()
+            {
+                jQuery('a:has(img)').fancybox();
+            });
+
+        //]]>
+        </script>
+        <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">jQuery.noConflict();</script>
+        <script src="/javascripts/jquery.fancybox.pack.js" type="text/javascript"></script>
+    </head>
